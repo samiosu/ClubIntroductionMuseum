@@ -1,14 +1,13 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class WebGLPermissionHandler : MonoBehaviour
 {
     // JSの関数をインポート
     [DllImport("__Internal")]
     private static extern void RequestGyroPermission();
-    [SerializeField] private GoGameScene goGameScene; // ゲーム開始の処理を持つクラスへの参照
-
     // UIのButtonのOnClickからこれを呼ぶ
     public void OnStartButtonClick()
     {
@@ -18,9 +17,15 @@ public class WebGLPermissionHandler : MonoBehaviour
         #endif
 
         // 2. Input System側のセンサー有効化
-        InputSurveillance.AttitudeSensorEnable();
+        var sensor = AttitudeSensor.current;
+        if (sensor != null && !sensor.enabled)
+        {
+            InputSystem.EnableDevice(sensor);
+            Debug.Log("Attitude Sensor has been ENABLED!"); 
+            // これで、有効化した瞬間の一回だけログが出ます
+        }
 
-        // 3. ゲーム開始（例：タイトル画面を消すなど）
-        goGameScene.GoGameSceneMethod();
+        // 3. ゲーム開始
+        SceneManager.LoadScene("GameScene");
     }
 }
