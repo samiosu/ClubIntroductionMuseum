@@ -68,7 +68,6 @@ public class CameraController : MonoBehaviour
             Debug.Log("Attitude Sensor has been ENABLED!"); 
             // これで、有効化した瞬間の一回だけログが出ます
         }
-        Debug.Log(movePerSecond);
         rb.linearVelocity = new Vector3(movePerSecond.x, rb.linearVelocity.y, movePerSecond.z) * Time.deltaTime;
     }
 }
