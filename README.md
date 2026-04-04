@@ -1,3 +1,11 @@
+# Unity Version
+6000.3.11f1
+# module
+* Windows Build Support(IL2CPP)
+* Web Build Support
+* iOS Build Support
+# Article
+Qiitaの記事を貼ること
 # License
 This soft is released under the MIT License.
 # Third-Party Assets

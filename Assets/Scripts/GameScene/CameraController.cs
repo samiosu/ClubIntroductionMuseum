@@ -24,6 +24,14 @@ public class CameraController : MonoBehaviour
         inputActions.Player.Move.canceled += OnMove;
         rb = GetComponent<Rigidbody>();
     }
+    void OnDestroy()
+    {
+        inputActions.Player.Look.performed -= OnLook;
+        inputActions.Player.Look.canceled -= OnLook;
+        inputActions.Player.Move.performed -= OnMove;
+        inputActions.Player.Move.canceled -= OnMove;
+        inputActions.Disable();
+    }
     // Moveアクションに紐づけたメソッド
     void OnMove(InputAction.CallbackContext context)
     {
@@ -69,5 +77,13 @@ public class CameraController : MonoBehaviour
             // これで、有効化した瞬間の一回だけログが出ます
         }
         rb.linearVelocity = new Vector3(movePerSecond.x, rb.linearVelocity.y, movePerSecond.z) * Time.deltaTime;
+    }
+    public void EnableInputSystem()
+    {
+        inputActions.Enable();
+    }
+    public void DisableInputSystem()
+    {
+        inputActions.Disable();
     }
 }
