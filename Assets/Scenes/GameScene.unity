@@ -275,7 +275,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 351441aa967ffdb438a3dcb649fee0c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextController
-  textFile: {fileID: 4900000, guid: 7b1f09d51167c67498a0a2a83ef0f025, type: 3}
+  textFile:
+  - {fileID: 4900000, guid: cd3500cb7e6c6264cbc117de99d51cf9, type: 3}
+  - {fileID: 4900000, guid: 82f3fc4329e871f44bde432777f22733, type: 3}
+  - {fileID: 4900000, guid: e33d77d18458f08428722d2259f8e793, type: 3}
+  - {fileID: 4900000, guid: 7b1f09d51167c67498a0a2a83ef0f025, type: 3}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0

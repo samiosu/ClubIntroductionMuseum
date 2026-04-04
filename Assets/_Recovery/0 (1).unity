@@ -275,7 +275,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 351441aa967ffdb438a3dcb649fee0c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextController
-  textFile: {fileID: 4900000, guid: 7b1f09d51167c67498a0a2a83ef0f025, type: 3}
+  textFile:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,6 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 089f5a4b26595104cba064ad2da4beb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GyroCameraController
+  moveSpeed: 1
 --- !u!135 &330585550
 SphereCollider:
   m_ObjectHideFlags: 0

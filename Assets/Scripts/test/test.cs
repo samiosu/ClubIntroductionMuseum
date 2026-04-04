@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class test : MonoBehaviour
+public class ChangeUIDevice : MonoBehaviour
 {
     public void Start()
     {
