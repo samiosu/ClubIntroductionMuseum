@@ -5,8 +5,11 @@ public class TextureToSprite : AssetPostprocessor
 {
     void OnPreprocessTexture()
     {
-        TextureImporter textureImporter = (TextureImporter)assetImporter;
-        textureImporter.textureType = TextureImporterType.Sprite;
-        textureImporter.spriteImportMode = SpriteImportMode.Single;
+        if(assetPath.Contains("Assets/Images"))
+        {
+            TextureImporter textureImporter = (TextureImporter)assetImporter;
+            textureImporter.textureType = TextureImporterType.Sprite;
+            textureImporter.spriteImportMode = SpriteImportMode.Single;
+        }
     }
 }
