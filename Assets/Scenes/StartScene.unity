@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 94939326}
   - component: {fileID: 94939325}
   - component: {fileID: 94939329}
-  - component: {fileID: 94939328}
+  - component: {fileID: 94939330}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -343,6 +343,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 94939330}
+        m_TargetAssemblyTypeName: MouseLock, Assembly-CSharp
+        m_MethodName: OnButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &94939326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,18 +393,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 94939323}
   m_CullTransparentMesh: 1
---- !u!114 &94939328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94939323}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d46c27ad3482f3d498eb23eb5c108e60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GoGameScene
 --- !u!114 &94939329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,6 +405,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef5964c477989dc4a8bec1e2d4c8ddeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WebGLPermissionHandler
+--- !u!114 &94939330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94939323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0c7012868f71441a9bdefa99c0d154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MouseLock
 --- !u!1 &268067472
 GameObject:
   m_ObjectHideFlags: 0
@@ -937,50 +949,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1556741893}
   m_CullTransparentMesh: 1
---- !u!1 &1749090827
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1749090829}
-  - component: {fileID: 1749090828}
-  m_Layer: 0
-  m_Name: DontDestroyOnLoad
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1749090828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1749090827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6deb351385381674993f1be8d04242f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InputSurveillance
---- !u!4 &1749090829
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1749090827}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -33.47465, y: -0, z: 288.5937}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1839179057
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,4 +1094,3 @@ SceneRoots:
   - {fileID: 81032907}
   - {fileID: 268067476}
   - {fileID: 1035426698}
-  - {fileID: 1749090829}

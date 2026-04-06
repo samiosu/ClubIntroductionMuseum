@@ -9,10 +9,11 @@ public class CameraController : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void RequestGyroPermission();
     private float sensitivity = 0.1f;
-    public float moveSpeed = 1f;
+    private float moveSpeed = 250f;
     private InputSystem_Actions inputActions;
     private Rigidbody rb;
-    private Vector3 movePerSecond;
+    private Vector2 moveVector;
+    private bool isPressedAlt = false;
 
     void Awake()
     {
@@ -35,9 +36,7 @@ public class CameraController : MonoBehaviour
     // Moveアクションに紐づけたメソッド
     void OnMove(InputAction.CallbackContext context)
     {
-        Vector2 input = context.ReadValue<Vector2>();
-        Vector3 moveDirection = transform.forward * input.y + transform.right * input.x;
-        movePerSecond = new Vector3(moveDirection.x, 0, moveDirection.z) * moveSpeed;
+        moveVector = context.ReadValue<Vector2>();
     }
     // Lookアクションに紐づけたメソッド
     void OnLook(InputAction.CallbackContext context)
@@ -61,22 +60,24 @@ public class CameraController : MonoBehaviour
             transform.Rotate(Vector3.left, rotX, Space.Self);
         }
     }
+    void OnCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        isPressedAlt = true;
+    }
+    void RemoveCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        isPressedAlt = false;
+    }
     void Update()
     {
-        // 1. ブラウザへの許可申請（iOS対策）
-        #if !UNITY_EDITOR && UNITY_WEBGL
-            RequestGyroPermission();
-        #endif
-
-        // 2. Input System側のセンサー有効化
-        var sensor = AttitudeSensor.current;
-        if (sensor != null && !sensor.enabled)
-        {
-            InputSystem.EnableDevice(sensor);
-            Debug.Log("Attitude Sensor has been ENABLED!"); 
-            // これで、有効化した瞬間の一回だけログが出ます
-        }
-        rb.linearVelocity = new Vector3(movePerSecond.x, rb.linearVelocity.y, movePerSecond.z) * Time.deltaTime;
+        // 移動処理
+        Vector3 moveDirection = transform.forward * moveVector.y + transform.right * moveVector.x;
+        Vector3 movePerSecond = new Vector3(moveDirection.x, 0, moveDirection.z) * moveSpeed * Time.deltaTime;
+        rb.linearVelocity = new Vector3(movePerSecond.x, rb.linearVelocity.y, movePerSecond.z);
     }
     public void EnableInputSystem()
     {

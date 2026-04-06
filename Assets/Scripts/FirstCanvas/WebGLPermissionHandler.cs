@@ -1,7 +1,6 @@
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class WebGLPermissionHandler : MonoBehaviour
 {
@@ -24,8 +23,5 @@ public class WebGLPermissionHandler : MonoBehaviour
             Debug.Log("Attitude Sensor has been ENABLED!"); 
             // これで、有効化した瞬間の一回だけログが出ます
         }
-
-        // 3. ゲーム開始
-        SceneManager.LoadScene("GameScene");
     }
 }
