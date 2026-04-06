@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void RequestGyroPermission();
     private float sensitivity = 0.1f;
-    private float moveSpeed = 250f;
+    private float moveSpeed = 500f;
     private InputSystem_Actions inputActions;
     private Rigidbody rb;
     private Vector2 moveVector;
