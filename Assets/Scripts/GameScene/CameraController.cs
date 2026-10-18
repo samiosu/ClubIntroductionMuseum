@@ -14,33 +14,51 @@ public class CameraController : MonoBehaviour
     private Rigidbody rb;
     private Vector2 moveVector;
     private bool isPressedAlt = false;
+    private bool CanProcessInput => isActiveAndEnabled && !canvasController.isFirstCanvas
+        && inputActions != null && inputActions.Player.enabled;
 
     void Awake()
     {
         inputActions = new InputSystem_Actions();
-        inputActions.Enable();
         inputActions.Player.Look.performed += OnLook;
-        inputActions.Player.Look.canceled += OnLook;
         inputActions.Player.Move.performed += OnMove;
         inputActions.Player.Move.canceled += OnMove;
         rb = GetComponent<Rigidbody>();
     }
+    void OnEnable()
+    {
+        EnableInputSystem();
+    }
+    void OnDisable()
+    {
+        DisableInputSystem();
+    }
     void OnDestroy()
     {
         inputActions.Player.Look.performed -= OnLook;
-        inputActions.Player.Look.canceled -= OnLook;
         inputActions.Player.Move.performed -= OnMove;
         inputActions.Player.Move.canceled -= OnMove;
-        inputActions.Disable();
+        inputActions.Dispose();
     }
     // Moveアクションに紐づけたメソッド
     void OnMove(InputAction.CallbackContext context)
     {
+        if (!CanProcessInput) return;
         moveVector = context.ReadValue<Vector2>();
     }
     // Lookアクションに紐づけたメソッド
     void OnLook(InputAction.CallbackContext context)
     {
+        if (!CanProcessInput) return;
+        if (context.control.device is Mouse)
+        {
+            var keyboard = Keyboard.current;
+            if (Cursor.lockState != CursorLockMode.Locked || (keyboard != null
+                && (keyboard.altKey.wasPressedThisFrame || keyboard.escapeKey.wasPressedThisFrame)))
+            {
+                return;
+            }
+        }
         // 1. 入力データがどの型かチェックして処理を分ける
         object rawValue = context.ReadValueAsObject();
 
@@ -74,6 +92,21 @@ public class CameraController : MonoBehaviour
     }
     void Update()
     {
+        if (!CanProcessInput) return;
+        var keyboard = Keyboard.current;
+        if (keyboard != null)
+        {
+            // Altでカーソルを切り替え、EscでもUI操作へ戻れるようにする。
+            if (keyboard.escapeKey.wasPressedThisFrame)
+            {
+                OnCursor();
+            }
+            else if (keyboard.altKey.wasPressedThisFrame)
+            {
+                if (isPressedAlt) RemoveCursor();
+                else OnCursor();
+            }
+        }
         // 移動処理
         Vector3 moveDirection = transform.forward * moveVector.y + transform.right * moveVector.x;
         Vector3 movePerSecond = new Vector3(moveDirection.x, 0, moveDirection.z) * moveSpeed * Time.deltaTime;
@@ -81,10 +114,27 @@ public class CameraController : MonoBehaviour
     }
     public void EnableInputSystem()
     {
-        inputActions.Enable();
+        if (isActiveAndEnabled && inputActions != null)
+        {
+            inputActions.Player.Enable();
+            isPressedAlt = false;
+            if (!canvasController.isFirstCanvas)
+            {
+                RemoveCursor();
+            }
+        }
     }
     public void DisableInputSystem()
     {
-        inputActions.Disable();
+        if (inputActions != null)
+        {
+            inputActions.Player.Disable();
+        }
+        moveVector = Vector2.zero;
+        if (rb != null)
+        {
+            rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+        }
+        OnCursor();
     }
 }

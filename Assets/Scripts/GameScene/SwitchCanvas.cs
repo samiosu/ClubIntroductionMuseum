@@ -13,6 +13,8 @@ public class SwitchCanvas : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        canvasController.isFirstCanvas = true;
+        IsManual.isManual = false;
         canvasFirst.SetActive(true);
         canvasVertical.SetActive(false);
         canvasHorizontal.SetActive(false);
